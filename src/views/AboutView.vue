@@ -12,13 +12,13 @@
         </p>
 
         <p class="mb-4 text-slate-600">
-          In the next stages, this project will connect to the DummyJSON API,
-          display products, support search and filtering, and include detail views.
+          It consumes product data from the DummyJSON API and is designed with
+          reusable components and responsive layouts.
         </p>
 
         <p class="text-slate-600">
-          The goal is to build a clean, responsive, strongly typed frontend
-          application that matches the mini project requirements.
+          More features such as search, filters, and product detail views will be
+          added in the next stages.
         </p>
       </div>
     </main>

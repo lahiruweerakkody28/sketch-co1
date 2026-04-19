@@ -4,36 +4,17 @@
     <HeroSection />
 
     <main class="mx-auto max-w-7xl px-6 py-12">
-      <section class="mb-10 text-center">
-        <h2 class="mb-3 text-3xl font-bold text-slate-800">Featured Categories</h2>
-        <p class="text-slate-600">
-          This is the Day 1 foundation. Products, search, filters, and API integration
-          will be added in the next days.
-        </p>
-      </section>
+      <LoadingSpinner v-if="isLoading" />
 
-      <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl bg-white p-6 shadow transition hover:shadow-lg">
-          <h3 class="mb-2 text-xl font-semibold text-slate-800">Shoes</h3>
-          <p class="text-slate-600">
-            Athletic and casual footwear for different types of sports.
-          </p>
-        </div>
+      <ErrorMessage
+        v-else-if="errorMessage"
+        :message="errorMessage"
+      />
 
-        <div class="rounded-2xl bg-white p-6 shadow transition hover:shadow-lg">
-          <h3 class="mb-2 text-xl font-semibold text-slate-800">Bags</h3>
-          <p class="text-slate-600">
-            Sports bags for travel, training sessions, and daily use.
-          </p>
-        </div>
-
-        <div class="rounded-2xl bg-white p-6 shadow transition hover:shadow-lg">
-          <h3 class="mb-2 text-xl font-semibold text-slate-800">Accessories</h3>
-          <p class="text-slate-600">
-            Useful items like bottles, gloves, bands, and training accessories.
-          </p>
-        </div>
-      </section>
+      <ProductGrid
+        v-else
+        :products="products"
+      />
     </main>
 
     <AppFooter />
@@ -41,7 +22,36 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import AppFooter from '../components/AppFooter.vue'
+import ErrorMessage from '../components/ErrorMessage.vue'
 import HeroSection from '../components/HeroSection.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 import NavBar from '../components/NavBar.vue'
+import ProductGrid from '../components/ProductGrid.vue'
+import { getProducts } from '../services/api'
+import type { Product } from '../types/product'
+
+const products = ref<Product[]>([])
+const isLoading = ref<boolean>(true)
+const errorMessage = ref<string>('')
+
+const fetchProducts = async (): Promise<void> => {
+  try {
+    isLoading.value = true
+    errorMessage.value = ''
+
+    const data = await getProducts()
+    products.value = data.products
+  } catch (error) {
+    console.error('Failed to fetch products:', error)
+    errorMessage.value = 'Unable to load products. Please try again later.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  void fetchProducts()
+})
 </script>
