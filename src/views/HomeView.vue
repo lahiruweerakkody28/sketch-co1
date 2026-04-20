@@ -85,26 +85,33 @@ const errorMessage = ref<string>('')
 const searchQuery = ref<string>('')
 const selectedCategory = ref<string>('')
 
-const fashionProducts = computed(() => {
-  return allProducts.value.filter(product =>
+const fashionProducts = computed<Product[]>(() => {
+  return allProducts.value.filter((product) =>
     FASHION_CATEGORIES.includes(product.category)
   )
 })
 
-const categories = computed(() => {
-  const unique = new Set(fashionProducts.value.map(product => product.category))
-  return Array.from(unique)
+const categories = computed<string[]>(() => {
+  const uniqueCategories = new Set(
+    fashionProducts.value.map((product) => product.category)
+  )
+  return Array.from(uniqueCategories)
 })
 
-const filteredProducts = computed(() => {
-  return fashionProducts.value.filter(product => {
+const filteredProducts = computed<Product[]>(() => {
+  const query = searchQuery.value.trim().toLowerCase()
+
+  return fashionProducts.value.filter((product) => {
     const matchesSearch =
-      product.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.brand.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+      query === '' ||
+      product.title.toLowerCase().includes(query) ||
+      product.brand.toLowerCase().includes(query) ||
+      product.description.toLowerCase().includes(query) ||
+      product.category.toLowerCase().includes(query)
 
     const matchesCategory =
-      selectedCategory.value === '' || product.category === selectedCategory.value
+      selectedCategory.value === '' ||
+      product.category === selectedCategory.value
 
     return matchesSearch && matchesCategory
   })
@@ -119,21 +126,21 @@ const handleFilter = (value: string): void => {
 }
 
 const fetchProducts = async (): Promise<void> => {
-  try {
-    isLoading.value = true
-    errorMessage.value = ''
+  isLoading.value = true
+  errorMessage.value = ''
 
+  try {
     const data = await getProducts()
     allProducts.value = data.products
   } catch (error) {
-    console.error('Failed to load products:', error)
-    errorMessage.value = 'Unable to load fashion items right now. Please try again later.'
+    console.error('API Error:', error)
+    errorMessage.value = 'Unable to load fashion items. Check your internet connection or API file.'
   } finally {
     isLoading.value = false
   }
 }
 
 onMounted(() => {
-  void fetchProducts()
+  fetchProducts()
 })
 </script>

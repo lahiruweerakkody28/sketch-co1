@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-10 -mt-6 relative z-10">
+  <section class="relative z-10 -mt-6 mb-10">
     <div class="rounded-3xl border border-stone-200 bg-white p-6 shadow-lg shadow-stone-200/50">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
@@ -21,10 +21,10 @@
             </label>
             <input
               v-model="searchTerm"
-              @input="emitSearch"
               type="text"
               placeholder="Search clothing items..."
               class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white"
+              @input="onSearchInput"
             />
           </div>
 
@@ -34,8 +34,8 @@
             </label>
             <select
               v-model="selectedCategory"
-              @change="emitFilter"
               class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white"
+              @change="onCategoryChange"
             >
               <option value="">All Categories</option>
               <option
@@ -53,8 +53,8 @@
               Action
             </label>
             <button
-              @click="resetFilters"
               class="w-full rounded-xl bg-neutral-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
+              @click="resetFilters"
             >
               Reset Filters
             </button>
@@ -80,11 +80,11 @@ const emit = defineEmits<{
 const searchTerm = ref<string>('')
 const selectedCategory = ref<string>('')
 
-const emitSearch = (): void => {
+const onSearchInput = (): void => {
   emit('search', searchTerm.value)
 }
 
-const emitFilter = (): void => {
+const onCategoryChange = (): void => {
   emit('filter', selectedCategory.value)
 }
 
@@ -98,7 +98,7 @@ const resetFilters = (): void => {
 const formatCategory = (value: string): string => {
   return value
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 </script>

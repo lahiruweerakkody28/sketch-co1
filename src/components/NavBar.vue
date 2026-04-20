@@ -31,17 +31,19 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <button
+        <router-link
+          to="/"
           class="hidden rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-neutral-900 transition hover:border-neutral-900 md:block"
         >
           New Season
-        </button>
+        </router-link>
 
-        <button
+        <router-link
+          to="/"
           class="rounded-full bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-600"
         >
           Shop Now
-        </button>
+        </router-link>
       </div>
     </div>
   </header>

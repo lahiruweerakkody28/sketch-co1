@@ -55,11 +55,12 @@
           </p>
         </div>
 
-        <button
+        <router-link
+          :to="`/product/${product.id}`"
           class="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-600"
         >
           View Item
-        </button>
+        </router-link>
       </div>
     </div>
   </article>

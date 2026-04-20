@@ -14,12 +14,12 @@
 
         <p class="mt-4 text-base leading-7 text-stone-600">
           It uses DummyJSON product data and focuses on clothing and fashion-related
-          categories such as shirts, tops, dresses, bags, shoes, and accessories. :contentReference[oaicite:3]{index=3}
+          categories such as shirts, tops, dresses, bags, shoes, and accessories.
         </p>
 
         <p class="mt-4 text-base leading-7 text-stone-600">
           The project emphasizes reusable components, strong typing, responsive design,
-          and a cleaner professional UI suitable for your mini project requirements. 
+          search and filter functionality, and product detail routing.
         </p>
       </div>
     </main>
