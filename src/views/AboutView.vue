@@ -1,24 +1,25 @@
 <template>
-  <div class="min-h-screen bg-slate-50">
+  <div class="min-h-screen bg-stone-50">
     <NavBar />
 
-    <main class="mx-auto max-w-4xl px-6 py-16">
-      <div class="rounded-2xl bg-white p-8 shadow-md">
-        <h1 class="mb-4 text-3xl font-bold text-slate-800">About This Project</h1>
+    <main class="mx-auto max-w-5xl px-6 py-16">
+      <div class="rounded-3xl bg-white p-8 shadow-sm">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-600">About Sketch-co</p>
+        <h1 class="mt-3 text-4xl font-black text-neutral-900">A modern clothing shop interface</h1>
 
-        <p class="mb-4 text-slate-600">
-          Sketch-co is a modern Single Page Application built with Vue 3,
+        <p class="mt-6 text-base leading-7 text-stone-600">
+          Sketch-co is designed as a modern fashion store built with Vue 3,
           TypeScript, Vite, and Tailwind CSS.
         </p>
 
-        <p class="mb-4 text-slate-600">
-          It consumes product data from the DummyJSON API and is designed with
-          reusable components and responsive layouts.
+        <p class="mt-4 text-base leading-7 text-stone-600">
+          It uses DummyJSON product data and focuses on clothing and fashion-related
+          categories such as shirts, tops, dresses, bags, shoes, and accessories. :contentReference[oaicite:3]{index=3}
         </p>
 
-        <p class="text-slate-600">
-          More features such as search, filters, and product detail views will be
-          added in the next stages.
+        <p class="mt-4 text-base leading-7 text-stone-600">
+          The project emphasizes reusable components, strong typing, responsive design,
+          and a cleaner professional UI suitable for your mini project requirements. 
         </p>
       </div>
     </main>

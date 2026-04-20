@@ -9,7 +9,7 @@ const api = axios.create({
 })
 
 export const getProducts = async (): Promise<ProductResponse> => {
-  const response = await api.get<ProductResponse>('/products')
+  const response = await api.get<ProductResponse>('/products?limit=0')
   return response.data
 }
 
