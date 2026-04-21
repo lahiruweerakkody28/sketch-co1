@@ -1,40 +1,40 @@
 <template>
   <section class="relative z-10 -mt-6 mb-10">
-    <div class="rounded-3xl border border-stone-200 bg-white p-6 shadow-lg shadow-stone-200/50">
+    <div class="rounded-3xl border border-stone-200 bg-white p-6 shadow-lg shadow-stone-200/50 dark:border-stone-700 dark:bg-stone-900 dark:shadow-none">
       <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-600">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-400">
             Browse Collection
           </p>
-          <h2 class="mt-2 text-2xl font-bold text-neutral-900">
+          <h2 class="mt-2 text-2xl font-bold text-neutral-900 dark:text-white">
             Find your perfect fashion match
           </h2>
-          <p class="mt-2 text-sm text-stone-500">
+          <p class="mt-2 text-sm text-stone-500 dark:text-stone-400">
             Search by name or filter by fashion category.
           </p>
         </div>
 
         <div class="grid flex-1 gap-4 md:grid-cols-3 lg:max-w-3xl">
           <div>
-            <label class="mb-2 block text-sm font-medium text-stone-700">
+            <label class="mb-2 block text-sm font-medium text-stone-700 dark:text-stone-300">
               Search
             </label>
             <input
               v-model="searchTerm"
               type="text"
               placeholder="Search clothing items..."
-              class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white"
+              class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white dark:border-stone-600 dark:bg-stone-800 dark:text-white dark:focus:bg-stone-800"
               @input="onSearchInput"
             />
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-stone-700">
+            <label class="mb-2 block text-sm font-medium text-stone-700 dark:text-stone-300">
               Category
             </label>
             <select
               v-model="selectedCategory"
-              class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white"
+              class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-rose-500 focus:bg-white dark:border-stone-600 dark:bg-stone-800 dark:text-white dark:focus:bg-stone-800"
               @change="onCategoryChange"
             >
               <option value="">All Categories</option>
@@ -49,11 +49,11 @@
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-stone-700">
+            <label class="mb-2 block text-sm font-medium text-stone-700 dark:text-stone-300">
               Action
             </label>
             <button
-              class="w-full rounded-xl bg-neutral-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-600"
+              class="w-full rounded-xl bg-neutral-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-600 dark:bg-rose-600 dark:hover:bg-rose-500"
               @click="resetFilters"
             >
               Reset Filters

@@ -1,6 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <NavBar @toggle-cart="isCartOpen = true" />
+  <div class="min-h-screen bg-stone-50 transition-colors duration-300 dark:bg-stone-950">
+    <NavBar
+      :is-dark="isDark"
+      @toggle-theme="toggleTheme"
+      @toggle-cart="isCartOpen = true"
+    />
 
     <CartDrawer
       :is-open="isCartOpen"
@@ -43,6 +47,7 @@ import HeroSection from '../components/HeroSection.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import NavBar from '../components/NavBar.vue'
 import ProductGrid from '../components/ProductGrid.vue'
+import { useTheme } from '../composables/useTheme'
 import { getProducts } from '../services/api'
 import type { Product } from '../types/product'
 
@@ -58,6 +63,8 @@ const CLOTH_CATEGORIES: string[] = [
   'mens-watches',
   'womens-watches'
 ]
+
+const { isDark, toggleTheme } = useTheme()
 
 const allProducts = ref<Product[]>([])
 const isLoading = ref<boolean>(true)

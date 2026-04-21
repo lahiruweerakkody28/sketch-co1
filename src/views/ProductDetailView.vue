@@ -1,6 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <NavBar @toggle-cart="isCartOpen = true" />
+  <div class="min-h-screen bg-stone-50 transition-colors duration-300 dark:bg-stone-950">
+    <NavBar
+      :is-dark="isDark"
+      @toggle-theme="toggleTheme"
+      @toggle-cart="isCartOpen = true"
+    />
 
     <CartDrawer
       :is-open="isCartOpen"
@@ -16,7 +20,7 @@
       />
 
       <div v-else-if="product" class="grid gap-8 md:grid-cols-2">
-        <div class="overflow-hidden rounded-2xl bg-white shadow">
+        <div class="overflow-hidden rounded-2xl bg-white shadow dark:bg-stone-900">
           <img
             :src="product.thumbnail"
             :alt="product.title"
@@ -24,11 +28,11 @@
           />
         </div>
 
-        <div class="rounded-2xl bg-white p-6 shadow">
-          <h1 class="text-3xl font-bold">{{ product.title }}</h1>
-          <p class="mt-2 text-gray-500">{{ product.brand }}</p>
-          <p class="mt-4 text-lg font-bold">${{ product.price }}</p>
-          <p class="mt-4 text-gray-700">{{ product.description }}</p>
+        <div class="rounded-2xl bg-white p-6 shadow dark:bg-stone-900">
+          <h1 class="text-3xl font-bold text-neutral-900 dark:text-white">{{ product.title }}</h1>
+          <p class="mt-2 text-gray-500 dark:text-stone-400">{{ product.brand }}</p>
+          <p class="mt-4 text-lg font-bold text-neutral-900 dark:text-white">${{ product.price }}</p>
+          <p class="mt-4 text-gray-700 dark:text-stone-300">{{ product.description }}</p>
 
           <div class="mt-6 flex gap-4">
             <button
@@ -40,7 +44,7 @@
 
             <router-link
               to="/"
-              class="rounded-lg bg-black px-5 py-3 text-white hover:bg-gray-800"
+              class="rounded-lg bg-black px-5 py-3 text-white hover:bg-gray-800 dark:bg-white dark:text-black"
             >
               Back
             </router-link>
@@ -59,12 +63,14 @@ import ErrorMessage from '../components/ErrorMessage.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import NavBar from '../components/NavBar.vue'
 import { useCart } from '../composables/useCart'
+import { useTheme } from '../composables/useTheme'
 import { getProductById } from '../services/api'
 import type { Product } from '../types/product'
 
 const route = useRoute()
 const router = useRouter()
 const { addToCart } = useCart()
+const { isDark, toggleTheme } = useTheme()
 
 const product = ref<Product | null>(null)
 const isLoading = ref<boolean>(true)
@@ -87,10 +93,7 @@ const fetchProduct = async (): Promise<void> => {
 }
 
 const handleAddToCart = (): void => {
-  if (!product.value) {
-    return
-  }
-
+  if (!product.value) return
   addToCart(product.value)
   router.push('/')
 }
