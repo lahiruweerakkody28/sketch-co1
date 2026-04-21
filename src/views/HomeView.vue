@@ -13,12 +13,50 @@
 
     <HeroSection />
 
-    <main class="mx-auto max-w-7xl px-6 py-10">
+    <main class="mx-auto max-w-7xl px-6 pb-12">
       <FilterBar
         :categories="categories"
         @search="handleSearch"
         @filter="handleFilter"
       />
+
+      <div class="mb-12 grid gap-4 md:grid-cols-3">
+        <div class="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400">
+            Why Choose Us
+          </p>
+          <h3 class="mt-2 text-2xl font-black text-stone-900 dark:text-white">
+            Premium Product Curation
+          </h3>
+          <p class="mt-3 text-sm leading-6 text-stone-500 dark:text-stone-400">
+            Carefully selected fashion items displayed in a clean, international-style shopping interface.
+          </p>
+        </div>
+
+        <div class="rounded-[2rem] bg-black p-6 text-white shadow-sm dark:bg-white dark:text-black">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-300 dark:text-rose-600">
+            Trending
+          </p>
+          <h3 class="mt-2 text-2xl font-black">
+            Global luxury-inspired browsing
+          </h3>
+          <p class="mt-3 text-sm leading-6 text-stone-300 dark:text-stone-700">
+            Modern structure, improved cart flow, responsive experience, and better visual quality.
+          </p>
+        </div>
+
+        <div class="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400">
+            User Experience
+          </p>
+          <h3 class="mt-2 text-2xl font-black text-stone-900 dark:text-white">
+            Smooth and professional
+          </h3>
+          <p class="mt-3 text-sm leading-6 text-stone-500 dark:text-stone-400">
+            Better spacing, premium cards, cleaner sections, and polished icon-based actions.
+          </p>
+        </div>
+      </div>
 
       <LoadingSpinner v-if="isLoading" />
 
@@ -61,7 +99,7 @@ const CLOTH_CATEGORIES: string[] = [
   'sunglasses',
   'womens-jewellery',
   'mens-watches',
-  'womens-watches'
+  'womens-watches',
 ]
 
 const { isDark, toggleTheme } = useTheme()

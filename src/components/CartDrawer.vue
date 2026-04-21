@@ -1,111 +1,126 @@
 <template>
-  <div v-if="isOpen" class="fixed inset-0 z-40">
+  <div v-if="isOpen" class="fixed inset-0 z-[100]">
     <div
-      class="absolute inset-0 bg-black/40"
+      class="absolute inset-0 bg-black/50 backdrop-blur-sm"
       @click="$emit('close')"
     ></div>
 
-    <div
-      class="absolute right-0 top-0 h-full w-[85vw] max-w-md bg-white shadow-2xl sm:w-full"
-    >
-      <div class="flex h-full flex-col">
-        <div class="flex items-center justify-between border-b px-4 py-4">
-          <h2 class="text-xl font-bold">Shopping Cart</h2>
-          <button
-            class="rounded-md bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300"
-            @click="$emit('close')"
-          >
-            Close
-          </button>
+    <aside class="absolute right-0 top-0 flex h-full w-[90vw] max-w-md flex-col bg-white shadow-2xl dark:bg-stone-950">
+      <div class="flex items-center justify-between border-b border-stone-200 px-5 py-4 dark:border-stone-800">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400">
+            Shopping Cart
+          </p>
+          <h2 class="mt-1 text-2xl font-black text-stone-900 dark:text-white">
+            Your Selection
+          </h2>
         </div>
 
-        <div class="flex-1 overflow-y-auto p-4">
-          <div v-if="cartItems.length === 0" class="text-center text-gray-500">
-            Your cart is empty
-          </div>
+        <button
+          class="rounded-xl border border-stone-300 px-3 py-2 text-sm font-medium text-stone-800 transition hover:bg-stone-100 dark:border-stone-700 dark:text-white dark:hover:bg-stone-900"
+          @click="$emit('close')"
+        >
+          Close
+        </button>
+      </div>
 
-          <div v-else class="space-y-4">
-            <div
-              v-for="item in cartItems"
-              :key="item.id"
-              class="rounded-xl border p-4 shadow-sm"
-            >
-              <div class="flex gap-3">
-                <img
-                  :src="item.thumbnail"
-                  :alt="item.title"
-                  class="h-20 w-20 rounded-lg object-cover"
-                />
+      <div class="flex-1 overflow-y-auto p-4">
+        <div v-if="cartItems.length === 0" class="rounded-[2rem] border border-dashed border-stone-300 p-8 text-center dark:border-stone-800">
+          <h3 class="text-xl font-black text-stone-900 dark:text-white">Your cart is empty</h3>
+          <p class="mt-2 text-sm text-stone-500 dark:text-stone-400">
+            Add premium items to view them here.
+          </p>
+        </div>
 
-                <div class="min-w-0 flex-1">
-                  <h3 class="truncate font-semibold">{{ item.title }}</h3>
-                  <p class="text-sm text-gray-500">{{ item.brand }}</p>
-                  <p class="mt-1 font-bold">${{ item.price }}</p>
+        <div v-else class="space-y-4">
+          <div
+            v-for="item in cartItems"
+            :key="item.id"
+            class="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-4 dark:border-stone-800 dark:bg-stone-900"
+          >
+            <div class="flex gap-3">
+              <img
+                :src="item.thumbnail"
+                :alt="item.title"
+                class="h-20 w-20 rounded-2xl object-cover"
+              />
 
-                  <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
-                    <div class="flex items-center gap-2">
-                      <button
-                        class="rounded bg-gray-200 px-2 py-1"
-                        @click="decreaseQuantity(item.id)"
-                      >
-                        -
-                      </button>
+              <div class="min-w-0 flex-1">
+                <h3 class="truncate font-bold text-stone-900 dark:text-white">
+                  {{ item.title }}
+                </h3>
+                <p class="text-sm text-stone-500 dark:text-stone-400">
+                  {{ item.brand }}
+                </p>
+                <p class="mt-1 font-black text-stone-900 dark:text-white">
+                  ${{ item.price }}
+                </p>
 
-                      <span>{{ item.quantity }}</span>
+                <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="rounded-xl border border-stone-300 px-3 py-1 text-sm dark:border-stone-700 dark:text-white"
+                      @click="decreaseQuantity(item.id)"
+                    >
+                      -
+                    </button>
 
-                      <button
-                        class="rounded bg-gray-200 px-2 py-1"
-                        @click="increaseQuantity(item.id)"
-                      >
-                        +
-                      </button>
-                    </div>
+                    <span class="text-sm font-semibold text-stone-900 dark:text-white">
+                      {{ item.quantity }}
+                    </span>
 
                     <button
-                      class="text-sm text-red-500 hover:text-red-700"
-                      @click="removeFromCart(item.id)"
+                      class="rounded-xl border border-stone-300 px-3 py-1 text-sm dark:border-stone-700 dark:text-white"
+                      @click="increaseQuantity(item.id)"
                     >
-                      Remove
+                      +
                     </button>
                   </div>
 
-                  <p class="mt-2 text-sm font-medium">
-                    Subtotal: ${{ (item.price * item.quantity).toFixed(2) }}
-                  </p>
+                  <button
+                    class="text-sm font-semibold text-rose-600 hover:text-rose-700 dark:text-rose-400"
+                    @click="removeFromCart(item.id)"
+                  >
+                    Remove
+                  </button>
                 </div>
+
+                <p class="mt-2 text-sm font-medium text-stone-700 dark:text-stone-300">
+                  Subtotal: ${{ (item.price * item.quantity).toFixed(2) }}
+                </p>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="border-t p-4">
-          <div class="mb-2 flex justify-between">
-            <span>Total Items:</span>
-            <span class="font-semibold">{{ totalItems }}</span>
-          </div>
-
-          <div class="mb-4 flex justify-between">
-            <span>Total Price:</span>
-            <span class="text-lg font-bold">${{ totalPrice.toFixed(2) }}</span>
-          </div>
-
-          <button
-            class="mb-2 w-full rounded-lg bg-black px-4 py-3 text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
-            :disabled="cartItems.length === 0"
-          >
-            Checkout
-          </button>
-
-          <button
-            class="w-full rounded-lg bg-red-500 px-4 py-3 text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50"
-            :disabled="cartItems.length === 0"
-            @click="clearCart"
-          >
-            Clear Cart
-          </button>
-        </div>
       </div>
-    </div>
+
+      <div class="border-t border-stone-200 p-4 dark:border-stone-800">
+        <div class="mb-2 flex justify-between text-sm">
+          <span class="text-stone-500 dark:text-stone-400">Total Items</span>
+          <span class="font-bold text-stone-900 dark:text-white">{{ totalItems }}</span>
+        </div>
+
+        <div class="mb-4 flex justify-between">
+          <span class="text-base font-semibold text-stone-900 dark:text-white">Total Price</span>
+          <span class="text-2xl font-black text-stone-900 dark:text-white">${{ totalPrice.toFixed(2) }}</span>
+        </div>
+
+        <button
+          class="mb-2 w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-stone-200"
+          :disabled="cartItems.length === 0"
+        >
+          Checkout
+        </button>
+
+        <button
+          class="w-full rounded-2xl border border-stone-300 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-stone-700 dark:text-white dark:hover:bg-stone-900"
+          :disabled="cartItems.length === 0"
+          @click="clearCart"
+        >
+          Clear Cart
+        </button>
+      </div>
+    </aside>
   </div>
 </template>
 

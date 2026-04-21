@@ -12,24 +12,28 @@
     />
 
     <main class="mx-auto max-w-5xl px-6 py-16">
-      <div class="rounded-3xl bg-white p-8 shadow-sm dark:bg-stone-900">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-400">About Sketch-co</p>
-        <h1 class="mt-3 text-4xl font-black text-neutral-900 dark:text-white">A modern clothing shop interface</h1>
+      <div class="rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400">
+          About Sketch-co
+        </p>
+
+        <h1 class="mt-3 text-4xl font-black text-stone-900 dark:text-white">
+          A premium international-style fashion shop
+        </h1>
 
         <p class="mt-6 text-base leading-7 text-stone-600 dark:text-stone-300">
-          Sketch-co is designed as a modern fashion store built with Vue 3,
-          TypeScript, Vite, and Tailwind CSS.
+          Sketch-co is a modern fashion shopping application built with Vue 3,
+          TypeScript, Vite, Tailwind CSS, and DummyJSON product data.
         </p>
 
         <p class="mt-4 text-base leading-7 text-stone-600 dark:text-stone-300">
-          It uses DummyJSON product data and focuses on clothing and fashion-related
-          categories such as shirts, tops, dresses, bags, shoes, and accessories.
+          The application focuses on fashion-related categories such as shirts, tops,
+          dresses, bags, shoes, watches, jewellery, and accessories.
         </p>
 
         <p class="mt-4 text-base leading-7 text-stone-600 dark:text-stone-300">
-          The project emphasizes reusable components, strong typing, responsive design,
-          search and filter functionality, product detail routing, shopping cart persistence,
-          and dark mode support.
+          It is designed with reusable components, responsive layout, cart support,
+          dark mode, elegant branding, and a high-quality international shop UI.
         </p>
       </div>
     </main>
