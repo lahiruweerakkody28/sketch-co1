@@ -1,19 +1,23 @@
-import axios from 'axios'
-import type { Product, ProductResponse } from '../types/product'
+import type { Product, ProductsResponse } from '../types/product'
 
-const api = axios.create({
-  baseURL: 'https://dummyjson.com',
-  timeout: 10000,
-})
+const BASE_URL = 'https://dummyjson.com/products'
 
-export const getProducts = async (): Promise<ProductResponse> => {
-  const response = await api.get<ProductResponse>('/products?limit=0')
-  return response.data
+export async function getProducts(): Promise<ProductsResponse> {
+  const response = await fetch(`${BASE_URL}?limit=194`)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch products')
+  }
+
+  return await response.json() as ProductsResponse
 }
 
-export const getProductById = async (id: number): Promise<Product> => {
-  const response = await api.get<Product>(`/products/${id}`)
-  return response.data
-}
+export async function getProductById(id: number): Promise<Product> {
+  const response = await fetch(`${BASE_URL}/${id}`)
 
-export default api
+  if (!response.ok) {
+    throw new Error('Failed to fetch product')
+  }
+
+  return await response.json() as Product
+}
