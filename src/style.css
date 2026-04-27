@@ -5,9 +5,9 @@
 html,
 body,
 #app {
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  min-height: 100%;
 }
 
 html {
@@ -15,19 +15,38 @@ html {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #fafaf9;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(244, 63, 94, 0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 30%),
+    #fafaf9;
   color: #1c1917;
 }
 
-body.dark,
 .dark body {
-  background-color: #0c0a09;
-  color: #f5f5f4;
+  background:
+    radial-gradient(circle at top left, rgba(244, 63, 94, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(147, 51, 234, 0.18), transparent 30%),
+    linear-gradient(135deg, #020617 0%, #0c0a09 45%, #1c1917 100%);
+  color: #fafaf9;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 img {
@@ -35,8 +54,28 @@ img {
   max-width: 100%;
 }
 
-button,
-input,
-select {
-  font: inherit;
+::selection {
+  background: #fb7185;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e7e5e4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a8a29e;
+  border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
 }
